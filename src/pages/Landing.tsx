@@ -8,7 +8,7 @@ import { CARS } from '../cars'
 import { CarPhoto } from '../components/CarPhoto'
 import { Mascot } from '../components/Mascot'
 import { SUBJECTS } from '../data'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 
 function Section({ eyebrow, title, sub, children }: { eyebrow: string; title: React.ReactNode; sub?: string; children: React.ReactNode }) {
   return (

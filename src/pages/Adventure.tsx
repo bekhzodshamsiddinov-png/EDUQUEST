@@ -5,7 +5,7 @@ import { MatchSetup, type SetupResult } from '../components/MatchSetup'
 import { Match } from '../components/Match'
 import { PATH_CHAPTERS, SUBJECTS, RACE_BANK } from '../data'
 import type { QItem } from '../quiz/generators'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 
 function shuffle<T>(a: T[]): T[] {
   const b = [...a]

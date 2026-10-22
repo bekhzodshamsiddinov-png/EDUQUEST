@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { User, Users, ChevronLeft, ChevronRight, Play, Keyboard, Zap, Flame, Timer, ArrowLeft } from 'lucide-react'
 import { CARS, type RealCar } from '../cars'
 import { CarPhoto } from './CarPhoto'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 
 export type SetupResult = { players: 1 | 2; names: string[]; cars: RealCar[]; duration: number }
 

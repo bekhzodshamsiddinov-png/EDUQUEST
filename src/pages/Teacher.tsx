@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 import { LayoutDashboard, Users, BookOpen, Trophy, Settings, Copy, Check, Download, Presentation, TrendingUp, Activity, Target, Send } from 'lucide-react'
 
 const STUDENTS = [

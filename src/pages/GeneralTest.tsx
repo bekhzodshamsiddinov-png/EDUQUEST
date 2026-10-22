@@ -3,7 +3,7 @@ import { Globe2, Languages, Brain, Leaf, Landmark, Puzzle, Bot, Laptop, BookA, F
 import { GEN_SUBJECTS, makePoolFactory, poolSize, type GeoKind, type SubjectId } from '../quiz/generators'
 import { MatchSetup, type SetupResult } from '../components/MatchSetup'
 import { Match } from '../components/Match'
-import { useLang, useT } from '../i18n'
+import { useLang, useT } from '../lang'
 
 const ICONS: Record<SubjectId, any> = { geo: Globe2, eng: Languages, rus: BookA, mental: Brain, bio: Leaf, history: Landmark, logic: Puzzle, robotics: Bot, it: Laptop }
 

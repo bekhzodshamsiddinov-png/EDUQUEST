@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { L } from './i18n'
+import { L } from './lang'
 import { Calculator, Sigma, Triangle, BookOpen, Languages, Globe2, Landmark, Castle, Leaf, Brain } from 'lucide-react'
 
 export type Subject = { id: string; name: string; grades: string; topics: number; icon: LucideIcon; from: string; to: string }

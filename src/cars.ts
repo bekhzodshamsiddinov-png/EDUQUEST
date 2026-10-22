@@ -1,4 +1,4 @@
-import { L } from './i18n'
+import { L } from './lang'
 
 const fp = (file: string, w = 640) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${w}`
 

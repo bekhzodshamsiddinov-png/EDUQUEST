@@ -4,7 +4,7 @@ import type { RealCar } from '../cars'
 import type { QItem } from '../quiz/generators'
 import { CarPhoto } from './CarPhoto'
 import { FlagImg } from './FlagImg'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 
 const GOAL = 120
 const KEYS: string[][] = [

@@ -1,6 +1,6 @@
 import { COUNTRIES, type Country } from './countries'
 import { ENGLISH, RUSSIAN, BIOLOGY, HISTORY, ROBOTICS, IT, type Bank } from './banks'
-import { translate, LANG_INDEX, type Lang, L } from '../i18n'
+import { translate, LANG_INDEX, type Lang, L } from '../lang'
 
 /** One playable question. a[0] is the correct answer; the match engine shuffles options. */
 export type QItem = { prompt: string; a: [string, string, string, string]; flag?: string; seq?: string[]; seqMs?: number }

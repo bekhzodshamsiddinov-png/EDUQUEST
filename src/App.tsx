@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Menu, X, ChevronDown, Rocket, KeyRound } from 'lucide-react'
-import { LANGS, LangProvider, translate, type Lang } from './i18n'
+import { LANGS, LangProvider, translate, type Lang } from './lang'
 import { Landing } from './pages/Landing'
 import { GeneralTest } from './pages/GeneralTest'
 import { Adventure } from './pages/Adventure'

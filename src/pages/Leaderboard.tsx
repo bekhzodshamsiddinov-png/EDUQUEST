@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Crown, ArrowUp, ArrowDown, Minus, Clock, Users, School, MapPin, Map } from 'lucide-react'
 import { CLASS_8B, PARALLEL_8, SCHOOL_TOP, CLASS_COMPARE, type Student } from '../data'
-import { useT, type TFn } from '../i18n'
+import { useT, type TFn } from '../lang'
 
 const LEAGUE: Record<Student['league'], string> = { Olmos: '#67e8f9', Oltin: '#ffd43b', Kumush: '#c0c7d6', Bronza: '#cd7f32' }
 const AV = ['#3b82f6', '#ff7a1a', '#22c55e', '#ec4899', '#8b5cf6', '#06b6d4', '#f59e0b', '#ef4444']

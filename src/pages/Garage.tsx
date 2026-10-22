@@ -2,7 +2,7 @@ import React from 'react'
 import { Check, Gauge, Users, Fuel, Car as CarIcon, ShieldCheck } from 'lucide-react'
 import { CARS } from '../cars'
 import { CarPhoto } from '../components/CarPhoto'
-import { useT } from '../i18n'
+import { useT } from '../lang'
 
 export function Garage({ selected, onSelect }: { selected: number; onSelect: (i: number) => void }) {
   const t = useT()
