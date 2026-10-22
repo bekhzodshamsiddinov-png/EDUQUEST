@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Crown, ArrowUp, ArrowDown, Minus, Clock, Users, School, MapPin, Map } from 'lucide-react'
 import { CLASS_8B, PARALLEL_8, SCHOOL_TOP, CLASS_COMPARE, type Student } from '../data'
+import { useT, type TFn } from '../i18n'
 
 const LEAGUE: Record<Student['league'], string> = { Olmos: '#67e8f9', Oltin: '#ffd43b', Kumush: '#c0c7d6', Bronza: '#cd7f32' }
 const AV = ['#3b82f6', '#ff7a1a', '#22c55e', '#ec4899', '#8b5cf6', '#06b6d4', '#f59e0b', '#ef4444']
@@ -30,7 +31,7 @@ function Podium({ list }: { list: Student[] }) {
   )
 }
 
-function Rows({ list, showCls, start = 1 }: { list: Student[]; showCls: boolean; start?: number }) {
+function Rows({ list, showCls, start = 1, t }: { list: Student[]; showCls: boolean; start?: number; t: TFn }) {
   return (
     <div className="space-y-2 mt-6">
       {list.map((s, i) => (
@@ -38,14 +39,14 @@ function Rows({ list, showCls, start = 1 }: { list: Student[]; showCls: boolean;
           <span className="w-7 text-center font-display font-bold text-white/70">{i + start}</span>
           <Avatar name={s.name} i={i} />
           <div className="flex-1 min-w-0">
-            <div className="font-bold truncate">{s.name} {s.me && <span className="text-xs px-2 py-0.5 rounded-full bg-[#c6ff3d] text-[#0b1033] ml-1">Siz</span>}</div>
+            <div className="font-bold truncate">{s.name} {s.me && <span className="text-xs px-2 py-0.5 rounded-full bg-[#c6ff3d] text-[#0b1033] ml-1">{t('Siz')}</span>}</div>
             <div className="text-xs text-white/55 flex items-center gap-2">
               {showCls && <span>{s.cls}</span>}
-              <span className="font-bold" style={{ color: LEAGUE[s.league] }}>● {s.league}</span>
+              <span className="font-bold" style={{ color: LEAGUE[s.league] }}>● {t(s.league)}</span>
             </div>
           </div>
           <div className="text-right hidden sm:block">
-            <div className="text-[11px] text-white/45">Bilim reytingi</div>
+            <div className="text-[11px] text-white/45">{t('Bilim reytingi')}</div>
             <div className="font-display font-bold">{s.elo}</div>
           </div>
           <div className="text-right w-20">
@@ -62,12 +63,13 @@ function Rows({ list, showCls, start = 1 }: { list: Student[]; showCls: boolean;
 }
 
 export function Leaderboard() {
+  const t = useT()
   const tabs = [
-    { id: 'class', label: 'Sinfim (8-B)', icon: Users },
-    { id: 'parallel', label: 'Parallel sinflar', icon: Users },
-    { id: 'school', label: 'Maktab', icon: School },
-    { id: 'district', label: 'Tuman', icon: MapPin },
-    { id: 'region', label: 'Viloyat', icon: Map },
+    { id: 'class', label: t('Sinfim (8-B)'), icon: Users },
+    { id: 'parallel', label: t('Parallel sinflar'), icon: Users },
+    { id: 'school', label: t('Maktab'), icon: School },
+    { id: 'district', label: t('Tuman'), icon: MapPin },
+    { id: 'region', label: t('Viloyat'), icon: Map },
   ] as const
   const [tab, setTab] = useState<(typeof tabs)[number]['id']>('class')
   const [secs, setSecs] = useState(2 * 86400 + 14 * 3600 + 22 * 60)
@@ -75,42 +77,41 @@ export function Leaderboard() {
   const d = Math.floor(secs / 86400), h = Math.floor((secs % 86400) / 3600), m = Math.floor((secs % 3600) / 60), s = secs % 60
 
   const list = tab === 'class' ? CLASS_8B : tab === 'parallel' ? PARALLEL_8 : SCHOOL_TOP
+  const district: [string, number, number][] = [[t('3-sonli maktab'), 1612, 94], [t('12-sonli maktab'), 1580, 88], [t('7-sonli maktab'), 1544, 81], [t('21-sonli maktab'), 1502, 76], [t('1-sonli maktab'), 1488, 70]]
+  const region: [string, number, number][] = [[t('To‘raqo‘rg‘on tumani'), 1598, 90], [t('Namangan shahri'), 1590, 86], [t('Chust tumani'), 1561, 79], [t('Davlatobod tumani'), 1549, 82], [t('Uchqo‘rg‘on tumani'), 1520, 74]]
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-10">
       <div className="text-center">
-        <span className="text-xs font-extrabold tracking-[0.25em] uppercase text-[#c6ff3d]">Reyting</span>
-        <h1 className="font-display text-4xl sm:text-6xl font-bold mt-3">Kim <span className="grad-text">eng kuchli?</span></h1>
-        <div className="text-xs text-white/40 mt-2">Namuna ma’lumotlar</div>
+        <span className="text-xs font-extrabold tracking-[0.25em] uppercase text-[#c6ff3d]">{t('Reyting')}</span>
+        <h1 className="font-display text-4xl sm:text-6xl font-bold mt-3">{t('Kim')} <span className="grad-text">{t('eng kuchli?')}</span></h1>
+        <div className="text-xs text-white/40 mt-2">{t('Namuna ma’lumotlar')}</div>
         <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full glass text-sm font-bold">
-          <Clock className="w-4 h-4 text-[#ffd43b]" /> Oltin liga tugashiga: <span className="tabular-nums text-[#ffd43b]">{d} kun {String(h).padStart(2, '0')}:{String(m).padStart(2, '0')}:{String(s).padStart(2, '0')}</span>
+          <Clock className="w-4 h-4 text-[#ffd43b]" /> {t('Oltin liga tugashiga:')} <span className="tabular-nums text-[#ffd43b]">{t('{d} kun', { d })} {String(h).padStart(2, '0')}:{String(m).padStart(2, '0')}:{String(s).padStart(2, '0')}</span>
         </div>
       </div>
 
       <div className="flex gap-2 overflow-x-auto scrollbar-none mt-8 pb-1">
-        {tabs.map((t) => (
-          <button key={t.id} onClick={() => setTab(t.id)} className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm ${tab === t.id ? 'bg-[#c6ff3d] text-[#0b1033]' : 'bg-white/10 hover:bg-white/20'}`}>
-            <t.icon className="w-4 h-4" /> {t.label}
+        {tabs.map((x) => (
+          <button key={x.id} onClick={() => setTab(x.id)} className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm ${tab === x.id ? 'bg-[#c6ff3d] text-[#0b1033]' : 'bg-white/10 hover:bg-white/20'}`}>
+            <x.icon className="w-4 h-4" /> {x.label}
           </button>
         ))}
       </div>
 
       {(tab === 'district' || tab === 'region') ? (
         <div className="glass rounded-3xl p-5 sm:p-7 mt-6">
-          <h3 className="font-display text-2xl font-bold">{tab === 'district' ? 'To‘raqo‘rg‘on tumani maktablari' : 'Namangan viloyati tumanlari'}</h3>
-          <p className="text-white/55 text-sm">O‘rtacha bilim reytingi va faol o‘quvchilar ulushi bo‘yicha</p>
+          <h3 className="font-display text-2xl font-bold">{tab === 'district' ? t('To‘raqo‘rg‘on tumani maktablari') : t('Namangan viloyati tumanlari')}</h3>
+          <p className="text-white/55 text-sm">{t('O‘rtacha bilim reytingi va faol o‘quvchilar ulushi bo‘yicha')}</p>
           <div className="space-y-3 mt-6">
-            {(tab === 'district'
-              ? [['3-sonli maktab', 1612, 94], ['12-sonli maktab', 1580, 88], ['7-sonli maktab', 1544, 81], ['21-sonli maktab', 1502, 76], ['1-sonli maktab', 1488, 70]]
-              : [['To‘raqo‘rg‘on tumani', 1598, 90], ['Namangan shahri', 1590, 86], ['Chust tumani', 1561, 79], ['Davlatobod tumani', 1549, 82], ['Uchqo‘rg‘on tumani', 1520, 74]]
-            ).map(([n, e, p]: any, i) => (
+            {(tab === 'district' ? district : region).map(([n, e, p], i) => (
               <div key={n} className={`rounded-2xl p-4 ${i === 0 ? 'bg-[#c6ff3d]/15 border-2 border-[#c6ff3d]' : 'bg-white/5 border border-white/10'}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3"><span className="font-display font-bold w-6">{i + 1}</span><span className="font-bold">{n}</span>{i === 0 && <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[#c6ff3d] text-[#0b1033]">PILOT</span>}</div>
                   <span className="font-display font-bold">{e}</span>
                 </div>
                 <div className="h-2 rounded-full bg-white/10 mt-3 overflow-hidden"><div className="h-full rounded-full bg-gradient-to-r from-[#3b82f6] to-[#22d3ee]" style={{ width: `${p}%` }} /></div>
-                <div className="text-[11px] text-white/50 mt-1">Faol o‘quvchilar: {p}%</div>
+                <div className="text-[11px] text-white/50 mt-1">{t('Faol o‘quvchilar: {p}%', { p })}</div>
               </div>
             ))}
           </div>
@@ -118,18 +119,18 @@ export function Leaderboard() {
       ) : (
         <div className="glass rounded-3xl p-4 sm:p-7 mt-6">
           <Podium list={list} />
-          <Rows list={list.slice(3)} showCls={tab !== 'class'} start={4} />
+          <Rows list={list.slice(3)} showCls={tab !== 'class'} start={4} t={t} />
           {tab === 'parallel' && (
             <div className="mt-8">
-              <h3 className="font-display text-xl font-bold">8-sinflar bellashuvi</h3>
-              <p className="text-white/55 text-sm">Sinf reytingi = o‘rtacha natija × qatnashish. Katta sinf faqat odami ko‘pligi uchun yutmaydi.</p>
+              <h3 className="font-display text-xl font-bold">{t('8-sinflar bellashuvi')}</h3>
+              <p className="text-white/55 text-sm">{t('Sinf reytingi = o‘rtacha natija × qatnashish. Katta sinf faqat odami ko‘pligi uchun yutmaydi.')}</p>
               <div className="space-y-3 mt-4">
                 {CLASS_COMPARE.map((c) => (
                   <div key={c.cls} className="grid grid-cols-[48px_1fr] gap-3 items-center">
                     <span className={`font-display font-bold text-lg ${c.cls === '8-B' ? 'text-[#c6ff3d]' : ''}`}>{c.cls}</span>
                     <div>
                       <div className="h-3 rounded-full bg-white/10 overflow-hidden"><div className="h-full rounded-full" style={{ width: `${c.avg}%`, background: c.cls === '8-B' ? '#c6ff3d' : '#3b82f6' }} /></div>
-                      <div className="flex justify-between text-[11px] text-white/55 mt-1"><span>O‘rtacha: {c.avg}%</span><span>Qatnashish: {c.part}%</span></div>
+                      <div className="flex justify-between text-[11px] text-white/55 mt-1"><span>{t('O‘rtacha: {v}%', { v: c.avg })}</span><span>{t('Qatnashish: {v}%', { v: c.part })}</span></div>
                     </div>
                   </div>
                 ))}

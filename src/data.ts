@@ -1,19 +1,20 @@
 import type { LucideIcon } from 'lucide-react'
+import { L } from './i18n'
 import { Calculator, Sigma, Triangle, BookOpen, Languages, Globe2, Landmark, Castle, Leaf, Brain } from 'lucide-react'
 
 export type Subject = { id: string; name: string; grades: string; topics: number; icon: LucideIcon; from: string; to: string }
 
 export const SUBJECTS: Subject[] = [
-  { id: 'math', name: 'Matematika', grades: '1–6-sinf', topics: 180, icon: Calculator, from: '#3b82f6', to: '#22d3ee' },
-  { id: 'algebra', name: 'Algebra', grades: '7–11-sinf', topics: 140, icon: Sigma, from: '#8b5cf6', to: '#3b82f6' },
-  { id: 'geometry', name: 'Geometriya', grades: '7–11-sinf', topics: 120, icon: Triangle, from: '#06b6d4', to: '#10b981' },
-  { id: 'ona', name: 'Ona tili', grades: '1–11-sinf', topics: 210, icon: BookOpen, from: '#f43f5e', to: '#f97316' },
-  { id: 'eng', name: 'Ingliz tili', grades: '1–11-sinf', topics: 200, icon: Languages, from: '#ec4899', to: '#8b5cf6' },
-  { id: 'geo', name: 'Geografiya', grades: '5–11-sinf', topics: 150, icon: Globe2, from: '#10b981', to: '#84cc16' },
-  { id: 'world', name: 'Jahon tarixi', grades: '6–11-sinf', topics: 130, icon: Landmark, from: '#f59e0b', to: '#ef4444' },
-  { id: 'uzhist', name: 'O‘zbekiston tarixi', grades: '6–11-sinf', topics: 130, icon: Castle, from: '#0ea5e9', to: '#22c55e' },
-  { id: 'bio', name: 'Biologiya', grades: '5–11-sinf', topics: 160, icon: Leaf, from: '#22c55e', to: '#14b8a6' },
-  { id: 'mental', name: 'Mental arifmetika', grades: '1–6-sinf', topics: 60, icon: Brain, from: '#eab308', to: '#f97316' },
+  { id: 'math', name: L('Matematika'), grades: L('1–6-sinf'), topics: 180, icon: Calculator, from: '#3b82f6', to: '#22d3ee' },
+  { id: 'algebra', name: L('Algebra'), grades: L('7–11-sinf'), topics: 140, icon: Sigma, from: '#8b5cf6', to: '#3b82f6' },
+  { id: 'geometry', name: L('Geometriya'), grades: L('7–11-sinf'), topics: 120, icon: Triangle, from: '#06b6d4', to: '#10b981' },
+  { id: 'ona', name: L('Ona tili'), grades: L('1–11-sinf'), topics: 210, icon: BookOpen, from: '#f43f5e', to: '#f97316' },
+  { id: 'eng', name: L('Ingliz tili'), grades: L('1–11-sinf'), topics: 200, icon: Languages, from: '#ec4899', to: '#8b5cf6' },
+  { id: 'geo', name: L('Geografiya'), grades: L('5–11-sinf'), topics: 150, icon: Globe2, from: '#10b981', to: '#84cc16' },
+  { id: 'world', name: L('Jahon tarixi'), grades: L('6–11-sinf'), topics: 130, icon: Landmark, from: '#f59e0b', to: '#ef4444' },
+  { id: 'uzhist', name: L('O‘zbekiston tarixi'), grades: L('6–11-sinf'), topics: 130, icon: Castle, from: '#0ea5e9', to: '#22c55e' },
+  { id: 'bio', name: L('Biologiya'), grades: L('5–11-sinf'), topics: 160, icon: Leaf, from: '#22c55e', to: '#14b8a6' },
+  { id: 'mental', name: L('Mental arifmetika'), grades: L('1–6-sinf'), topics: 60, icon: Brain, from: '#eab308', to: '#f97316' },
 ]
 
 /** Demo bank for the race. First answer is always the correct one; options are shuffled per player at runtime. */
@@ -91,11 +92,11 @@ export const CLASS_COMPARE = [
 ]
 
 export const PATH_CHAPTERS = [
-  { city: 'Toshkent', title: '1-bob: Chiziqli tengsizliklar', stars: 3, state: 'done' as const },
-  { city: 'Samarqand', title: '2-bob: Kvadrat ildiz', stars: 3, state: 'done' as const },
-  { city: 'Buxoro', title: '3-bob: Kvadrat tenglamalar', stars: 2, state: 'done' as const },
-  { city: 'Xiva', title: '4-bob: Viyet teoremasi', stars: 0, state: 'current' as const },
-  { city: 'Termiz', title: '5-bob: Kvadrat uchhad', stars: 0, state: 'locked' as const },
-  { city: 'Namangan', title: '6-bob: Kvadrat tengsizliklar', stars: 0, state: 'locked' as const },
-  { city: 'Andijon', title: 'Boss poygasi: 1-yarim yil', stars: 0, state: 'boss' as const },
+  { city: L('Toshkent'), title: L('1-bob: Chiziqli tengsizliklar'), stars: 3, state: 'done' as const },
+  { city: L('Samarqand'), title: L('2-bob: Kvadrat ildiz'), stars: 3, state: 'done' as const },
+  { city: L('Buxoro'), title: L('3-bob: Kvadrat tenglamalar'), stars: 2, state: 'done' as const },
+  { city: L('Xiva'), title: L('4-bob: Viyet teoremasi'), stars: 0, state: 'current' as const },
+  { city: L('Termiz'), title: L('5-bob: Kvadrat uchhad'), stars: 0, state: 'locked' as const },
+  { city: L('Namangan'), title: L('6-bob: Kvadrat tengsizliklar'), stars: 0, state: 'locked' as const },
+  { city: L('Andijon'), title: L('Boss poygasi: 1-yarim yil'), stars: 0, state: 'boss' as const },
 ]
