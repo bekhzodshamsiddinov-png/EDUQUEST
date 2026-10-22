@@ -5,18 +5,34 @@ import type { CarChoice } from '../components/CarPicker'
 import { MatchSetup, type SetupResult } from '../components/MatchSetup'
 import { Match } from '../components/Match'
 import { PATH_CHAPTERS, SUBJECTS, RACE_BANK } from '../data'
-import type { QItem } from '../quiz/generators'
-import { useT } from '../lang'
+import { makePoolFactory, type QItem } from '../quiz/generators'
+import { CLASS_BANK } from '../quiz/classBank'
+import { useLang, useT, type Lang } from '../lang'
 
 function shuffle<T>(a: T[]): T[] {
   const b = [...a]
   for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]] }
   return b
 }
-const classPool = (): QItem[] => shuffle(RACE_BANK).map((q) => ({ prompt: q.q, a: q.a }))
+/** Questions for the chosen subject and grade: this grade first, then the two previous grades as review. */
+function makeClassPool(subject: string, grade: number, lang: Lang): () => QItem[] {
+  if (subject === 'mental') return makePoolFactory('mental', grade <= 2 ? 'easy' : grade <= 4 ? 'medium' : 'hard', 'mix', lang)
+  return () => {
+    const items = CLASS_BANK[subject] ?? []
+    let own = items.filter((i) => i.g === grade)
+    const prev = items.filter((i) => i.g < grade && i.g >= grade - 2)
+    if (!own.length && !prev.length) {
+      const nearest = items.reduce((m, i) => Math.min(m, Math.abs(i.g - grade)), 99)
+      own = items.filter((i) => Math.abs(i.g - grade) === nearest)
+    }
+    const pool = [...shuffle(own), ...shuffle(prev)].map((q) => ({ prompt: q.q, a: q.a }))
+    return pool.length >= 4 ? pool : shuffle(RACE_BANK).map((q) => ({ prompt: q.q, a: q.a }))
+  }
+}
 
 export function Adventure({ defaultCar }: { defaultCar?: CarChoice }) {
   const t = useT()
+  const lang = useLang()
   const [grade, setGrade] = useState(8)
   const [subject, setSubject] = useState('algebra')
   const [sel, setSel] = useState<number | null>(null)
@@ -32,7 +48,7 @@ export function Adventure({ defaultCar }: { defaultCar?: CarChoice }) {
   }
 
   if (setup !== null && match) {
-    return <Match players={match.players} names={match.names} cars={match.cars} duration={match.duration} makePool={classPool} title={`${t('{n}-sinf', { n: grade })} · ${t(PATH_CHAPTERS[setup].title)}`} onExit={() => setMatch(null)} />
+    return <Match players={match.players} names={match.names} cars={match.cars} duration={match.duration} makePool={makeClassPool(subject, grade, lang)} title={`${t('{n}-sinf', { n: grade })} · ${t(PATH_CHAPTERS[setup].title)}`} onExit={() => setMatch(null)} />
   }
   if (setup !== null) {
     return <MatchSetup defaultCar={defaultCar} title={t(PATH_CHAPTERS[setup].title)} subtitle={`${t('{n}-sinf', { n: grade })} · ${t(subj.name)} · ${t(PATH_CHAPTERS[setup].city)}`} onBack={() => setSetup(null)} onStart={setMatch} />

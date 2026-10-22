@@ -1,5 +1,8 @@
 import { COUNTRIES, type Country } from './countries'
 import { ENGLISH, RUSSIAN, BIOLOGY, HISTORY, ROBOTICS, IT, type Bank } from './banks'
+import { ENGLISH_EXTRA, RUSSIAN_EXTRA } from './extraLang'
+
+const merge = (a: Bank, b: Bank): Bank => Object.fromEntries(Object.keys(a).map((k) => [k, [...a[k], ...(b[k] ?? [])]]))
 import { translate, LANG_INDEX, type Lang, L } from '../lang'
 
 /** One playable question. a[0] is the correct answer; the match engine shuffles options. */
@@ -166,7 +169,7 @@ function logicItem(level: string, lang: Lang): QItem {
 }
 
 /* ---------------- Pool factory ---------------- */
-const BANKS: Partial<Record<SubjectId, Bank>> = { eng: ENGLISH, rus: RUSSIAN, bio: BIOLOGY, history: HISTORY, robotics: ROBOTICS, it: IT }
+const BANKS: Partial<Record<SubjectId, Bank>> = { eng: merge(ENGLISH, ENGLISH_EXTRA), rus: merge(RUSSIAN, RUSSIAN_EXTRA), bio: BIOLOGY, history: HISTORY, robotics: ROBOTICS, it: IT }
 
 /** Returns a function that produces a fresh, non-repeating pool for one player. */
 export function makePoolFactory(subject: SubjectId, level: string, geoKind: GeoKind, lang: Lang): () => QItem[] {
