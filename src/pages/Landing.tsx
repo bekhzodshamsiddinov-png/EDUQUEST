@@ -5,7 +5,7 @@ import {
 } from 'lucide-react'
 import type { Page } from '../App'
 import { CARS } from '../cars'
-import { CarPhoto } from '../components/CarPhoto'
+import { CarToken, Showroom } from '../components/TopCar'
 import { Mascot } from '../components/Mascot'
 import { SUBJECTS } from '../data'
 import { useT } from '../lang'
@@ -46,8 +46,8 @@ function HeroRace() {
     return () => clearInterval(iv)
   }, [])
   const lanes = [
-    { name: 'Madina · 8-B', car: CARS[0], ring: '#3b82f6' },
-    { name: 'Sardor · 8-A', car: CARS[3], ring: '#ff7a1a' },
+    { name: 'Madina · 8-B', car: CARS[6], ring: '#3b82f6' },
+    { name: 'Sardor · 8-A', car: CARS[10], ring: '#ff7a1a' },
   ]
   return (
     <div className="glass rounded-[28px] p-3 sm:p-4 bg-[#0b1033]/60 relative overflow-hidden">
@@ -60,7 +60,7 @@ function HeroRace() {
           <div className="absolute right-0 top-0 bottom-0 w-4 finish-flag opacity-90" />
           <div className="absolute left-2 top-1.5 text-[10px] font-bold text-white/60 z-10">{l.name} · {l.car.name}</div>
           <div className="absolute bottom-2 transition-[left] duration-700 ease-out" style={{ left: `calc(${p[i] * 0.74}% + 6px)` }}>
-            <CarPhoto car={l.car} token ring={l.ring} number={i + 1} nitro={nitro[i]} />
+            <CarToken car={l.car} ring={l.ring} number={i + 1} nitro={nitro[i]} />
             {pops.filter((x) => x.lane === i).slice(-1).map((x) => (
               <span key={x.id} className={`rise absolute -top-3 left-24 text-xs font-extrabold whitespace-nowrap ${x.text.startsWith('NITRO') ? 'text-[#ffd43b]' : 'text-[#c6ff3d]'}`}>{x.text}</span>
             ))}
@@ -221,16 +221,16 @@ export function Landing({ go, openCode }: { go: (p: Page) => void; openCode: () 
       </Section>
 
       {/* GARAGE */}
-      <Section eyebrow={t('Garaj va mukofotlar')} title={<>{t('Haqiqiy mashinalar,')} <span className="text-[#ffd43b]">{t('haqiqiy raqobat')}</span></>} sub={t('O‘zbekiston yo‘llaridagi mashinalar bilan poyga qiling. Qoidalar hammaga bir xil: tezlikni faqat bilim beradi.')}>
+      <Section eyebrow={t('Garaj va mukofotlar')} title={<>{t('Haqiqiy mashinalar,')} <span className="text-[#ffd43b]">{t('haqiqiy raqobat')}</span></>} sub={t('Chevrolet, BYD yoki Chayka — mashinangizni tanlab poyga qiling. Qoidalar hammaga bir xil: tezlikni faqat bilim beradi.')}>
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4 sm:gap-6">
           <div className="glass rounded-3xl p-4 sm:p-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {CARS.map((c) => (
+              {CARS.filter((c) => ['cobalt', 'gentra', 'tracker', 'chazor', 'seal', 'chayka'].includes(c.id)).map((c) => (
                 <button key={c.id} onClick={() => go('garage')} className="rounded-2xl overflow-hidden border border-white/10 bg-black/20 text-left hover:border-white/40 transition">
-                  <CarPhoto car={c} className="aspect-[16/10] w-full" />
+                  <Showroom car={c} spin={false} flat className="aspect-[16/10] w-full" />
                   <div className="p-3">
                     <div className="font-display font-bold text-sm leading-tight">{c.name}</div>
-                    <div className="text-[11px] text-white/55 flex items-center gap-1 mt-0.5"><Gauge className="w-3 h-3" /> {c.hp} {t('o.k.')} · {c.engine}</div>
+                    <div className="text-[11px] text-white/55 flex items-center gap-1 mt-0.5"><Gauge className="w-3 h-3" /> {c.hp} {t('o.k.')} · {t(c.engine)}</div>
                   </div>
                 </button>
               ))}

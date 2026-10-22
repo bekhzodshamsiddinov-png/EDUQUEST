@@ -7,6 +7,8 @@ import { Adventure } from './pages/Adventure'
 import { Leaderboard } from './pages/Leaderboard'
 import { Garage } from './pages/Garage'
 import { Teacher } from './pages/Teacher'
+import { CARS } from './cars'
+import type { CarChoice } from './components/CarPicker'
 
 export type Page = 'home' | 'test' | 'path' | 'rating' | 'garage' | 'teacher'
 
@@ -70,7 +72,7 @@ export function App() {
   const [langOpen, setLangOpen] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [modal, setModal] = useState(false)
-  const [car, setCar] = useState(0)
+  const [car, setCar] = useState<CarChoice>({ idx: 0, color: CARS[0].accent })
   const t = (s: string, v?: Record<string, string | number>) => translate(lang, s, v)
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, [page])

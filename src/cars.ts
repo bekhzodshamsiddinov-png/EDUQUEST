@@ -1,25 +1,37 @@
 import { L } from './lang'
 
-const fp = (file: string, w = 640) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${w}`
+export type Body = 'sedan' | 'van' | 'bigsuv' | 'sport' | 'limo' | 'cross'
+export type Brand = 'Chevrolet' | 'BYD' | 'GAZ'
 
 export type RealCar = {
   id: string
+  brand: Brand
   name: string
-  photo: string
-  page: string
+  body: Body
   type: string
   engine: string
   hp: number
   seats: number
   accent: string
+  ev?: boolean
 }
 
-/** Real cars popular in Uzbekistan. Photos: Wikimedia Commons (CC licences, see `page`). */
+/** Cars popular in Uzbekistan, drawn as top-down 3D-style models (components/TopCar). */
 export const CARS: RealCar[] = [
-  { id: 'cobalt', name: 'Chevrolet Cobalt', photo: fp('Chevrolet Cobalt 2013 in Russia.JPG'), page: 'https://commons.wikimedia.org/wiki/File:Chevrolet_Cobalt_2013_in_Russia.JPG', type: L('Sedan'), engine: '1.5 L', hp: 106, seats: 5, accent: '#3b82f6' },
-  { id: 'damas', name: 'Chevrolet Damas', photo: fp('Chevrolet Damas Deluxe in Bukhara, front right.jpg'), page: 'https://commons.wikimedia.org/wiki/File:Chevrolet_Damas_Deluxe_in_Bukhara,_front_right.jpg', type: L('Mikroavtobus'), engine: '0.8 L', hp: 38, seats: 7, accent: '#94a3b8' },
-  { id: 'gentra', name: 'Chevrolet Gentra', photo: fp('Ravon Gentra.jpg'), page: 'https://commons.wikimedia.org/wiki/File:Ravon_Gentra.jpg', type: L('Sedan'), engine: '1.5 L', hp: 107, seats: 5, accent: '#e11d48' },
-  { id: 'tracker', name: 'Chevrolet Tracker', photo: fp('2022 Chevrolet Tracker 1.2 Turbo LS.jpg'), page: 'https://commons.wikimedia.org/wiki/File:2022_Chevrolet_Tracker_1.2_Turbo_LS.jpg', type: L('Krossover'), engine: '1.2 L Turbo', hp: 132, seats: 5, accent: '#22c55e' },
-  { id: 'malibu', name: 'Chevrolet Malibu', photo: fp('2019 Chevrolet Malibu (facelift) LT, front 10.19.19.jpg'), page: 'https://commons.wikimedia.org/wiki/File:2019_Chevrolet_Malibu_(facelift)_LT,_front_10.19.19.jpg', type: L('Biznes sedan'), engine: '1.5 L Turbo', hp: 163, seats: 5, accent: '#f59e0b' },
-  { id: 'tahoe', name: 'Chevrolet Tahoe High Country', photo: fp('2021 Chevrolet Tahoe High Country, front 12.24.20.jpg'), page: 'https://commons.wikimedia.org/wiki/File:2021_Chevrolet_Tahoe_High_Country,_front_12.24.20.jpg', type: L('Yo‘ltanlamas'), engine: '6.2 L V8', hp: 420, seats: 7, accent: '#a855f7' },
+  { id: 'cobalt', brand: 'Chevrolet', name: 'Chevrolet Cobalt', body: 'sedan', type: L('Sedan'), engine: '1.5 L', hp: 106, seats: 5, accent: '#f1f5f9' },
+  { id: 'gentra', brand: 'Chevrolet', name: 'Chevrolet Gentra', body: 'sedan', type: L('Sedan'), engine: '1.5 L', hp: 107, seats: 5, accent: '#dc2626' },
+  { id: 'damas', brand: 'Chevrolet', name: 'Chevrolet Damas', body: 'van', type: L('Mikroavtobus'), engine: '0.8 L', hp: 38, seats: 7, accent: '#e2e8f0' },
+  { id: 'tracker', brand: 'Chevrolet', name: 'Chevrolet Tracker', body: 'cross', type: L('Krossover'), engine: '1.2 L Turbo', hp: 132, seats: 5, accent: '#16a34a' },
+  { id: 'malibu', brand: 'Chevrolet', name: 'Chevrolet Malibu', body: 'sedan', type: L('Biznes sedan'), engine: '1.5 L Turbo', hp: 163, seats: 5, accent: '#1e293b' },
+  { id: 'tahoe', brand: 'Chevrolet', name: 'Chevrolet Tahoe', body: 'bigsuv', type: L('Yo‘ltanlamas'), engine: '6.2 L V8', hp: 420, seats: 7, accent: '#111827' },
+  { id: 'chazor', brand: 'BYD', name: 'BYD Chazor', body: 'sedan', type: L('Gibrid sedan'), engine: '1.5 L DM-i', hp: 180, seats: 5, accent: '#0ea5e9' },
+  { id: 'song', brand: 'BYD', name: 'BYD Song Plus', body: 'cross', type: L('Gibrid krossover'), engine: '1.5 L DM-i', hp: 197, seats: 5, accent: '#9ca3af' },
+  { id: 'han', brand: 'BYD', name: 'BYD Han EV', body: 'sedan', type: L('Elektromobil'), engine: L('Elektr, 4×4'), hp: 494, seats: 5, accent: '#7f1d1d', ev: true },
+  { id: 'seal', brand: 'BYD', name: 'BYD Seal', body: 'sport', type: L('Elektr sport-sedan'), engine: L('Elektr'), hp: 313, seats: 5, accent: '#2563eb', ev: true },
+  { id: 'chayka', brand: 'GAZ', name: 'GAZ-14 Chayka', body: 'limo', type: L('Limuzin'), engine: '5.5 L V8', hp: 220, seats: 7, accent: '#0a0a0a' },
 ]
+
+export const BRANDS: Brand[] = ['Chevrolet', 'BYD', 'GAZ']
+export const BRAND_LABEL: Record<Brand, string> = { Chevrolet: 'Chevrolet', BYD: 'BYD', GAZ: 'Chayka' }
+
+export const PAINTS = ['#f1f5f9', '#111827', '#dc2626', '#2563eb', '#16a34a', '#f59e0b', '#9ca3af', '#7c3aed', '#ec4899', '#0ea5e9']

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Pause, Play, RotateCcw, Trophy, Flame, LogOut, Flag as FlagIcon } from 'lucide-react'
 import type { RealCar } from '../cars'
 import type { QItem } from '../quiz/generators'
-import { CarPhoto } from './CarPhoto'
+import { CarToken } from './TopCar'
 import { FlagImg } from './FlagImg'
 import { useT } from '../lang'
 
@@ -253,7 +253,7 @@ export function Match({
               <div className="absolute left-3 top-1.5 text-[11px] font-bold z-10" style={{ color: COLORS[pi].main }}>{nm(pi)} · {cars[pi].name}</div>
               <div className="absolute right-8 top-1.5 text-[11px] font-bold text-white/70 tabular-nums z-10">{p.dist} / {GOAL} m</div>
               <div className="absolute bottom-2 transition-[left] duration-700 ease-out" style={{ left: `calc(${(p.dist / GOAL) * 84}% + 8px)` }}>
-                <CarPhoto car={cars[pi]} token ring={COLORS[pi].main} number={pi + 1} nitro={p.nitro} />
+                <CarToken car={cars[pi]} ring={COLORS[pi].main} number={pi + 1} nitro={p.nitro} />
                 {p.pop && <span key={p.pop.id} className={`rise absolute -top-4 left-24 text-xs font-extrabold whitespace-nowrap ${p.pop.text.startsWith('NITRO') ? 'text-[#ffd43b]' : p.pop.text.startsWith('+') ? 'text-[#c6ff3d]' : 'text-[#ff8a8a]'}`}>{p.pop.text}</span>}
               </div>
             </div>

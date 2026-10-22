@@ -369,7 +369,18 @@ const ROWS: [string, string, string, string][] = [
 ["—", "—", "—", "—"],
 ["Natija nechaga teng?", "Чему равен результат?", "What is the result?", "结果是多少？"],
 ["{n}-sinf", "{n} класс", "Grade {n}", "{n} 年级"],
-["8-B sinf", "8-Б класс", "Class 8-B", "8-B 班"]
+["8-B sinf", "8-Б класс", "Class 8-B", "8-B 班"],
+["Elektr", "Электро", "Electric", "纯电"],
+["Elektr sport-sedan", "Электро спорт-седан", "Electric sports sedan", "纯电运动轿车"],
+["Elektr, 4×4", "Электро, 4×4", "Electric, AWD", "纯电，四驱"],
+["Elektromobil", "Электромобиль", "Electric car", "电动汽车"],
+["Gibrid krossover", "Гибридный кроссовер", "Hybrid crossover", "混动SUV"],
+["Gibrid sedan", "Гибридный седан", "Hybrid sedan", "混动轿车"],
+["Limuzin", "Лимузин", "Limousine", "豪华轿车"],
+["Rang", "Цвет", "Colour", "颜色"],
+["Mening mashinam", "Моя машина", "My car", "我的车"],
+["Chevrolet, BYD yoki afsonaviy Chayka — markani, modelni va rangini tanlang. Poyga qoidalari hammasi uchun bir xil: tezlikni faqat bilim beradi.", "Chevrolet, BYD или легендарная «Чайка» — выберите марку, модель и цвет. Правила гонки одинаковы для всех: скорость даёт только знание.", "Chevrolet, BYD or the legendary Chaika — pick the brand, model and colour. Race rules are the same for everyone: only knowledge gives speed.", "雪佛兰、比亚迪或传奇的“海鸥”——选择品牌、车型和颜色。比赛规则人人相同：只有知识才能带来速度。"],
+["Chevrolet, BYD yoki Chayka — mashinangizni tanlab poyga qiling. Qoidalar hammaga bir xil: tezlikni faqat bilim beradi.", "Chevrolet, BYD или «Чайка» — выберите машину и мчитесь. Правила одинаковы для всех: скорость даёт только знание.", "Chevrolet, BYD or Chaika — pick your car and race. The rules are the same for everyone: only knowledge gives speed.", "雪佛兰、比亚迪或“海鸥”——选好你的车开始比赛。规则人人相同：只有知识才能带来速度。"],
 ]
 
 export const DICT: Record<'ru' | 'en' | 'zh', Record<string, string>> = { ru: {}, en: {}, zh: {} }

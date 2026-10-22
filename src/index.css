@@ -132,3 +132,5 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+.turntable { animation: spin 14s linear infinite; }
+.turntable:hover { animation-play-state: paused; }

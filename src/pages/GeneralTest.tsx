@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import { Globe2, Languages, Brain, Leaf, Landmark, Puzzle, Bot, Laptop, BookA, Flag as FlagIcon, Building2, Shuffle, ArrowRight } from 'lucide-react'
 import { GEN_SUBJECTS, makePoolFactory, poolSize, type GeoKind, type SubjectId } from '../quiz/generators'
+import type { CarChoice } from '../components/CarPicker'
 import { MatchSetup, type SetupResult } from '../components/MatchSetup'
 import { Match } from '../components/Match'
 import { useLang, useT } from '../lang'
 
 const ICONS: Record<SubjectId, any> = { geo: Globe2, eng: Languages, rus: BookA, mental: Brain, bio: Leaf, history: Landmark, logic: Puzzle, robotics: Bot, it: Laptop }
 
-export function GeneralTest({ defaultCar = 0 }: { defaultCar?: number }) {
+export function GeneralTest({ defaultCar }: { defaultCar?: CarChoice }) {
   const t = useT()
   const lang = useLang()
   const [subject, setSubject] = useState<SubjectId | null>(null)

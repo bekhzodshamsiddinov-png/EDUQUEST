@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Lock, Star, Crown, Play, MapPin, Swords, X } from 'lucide-react'
 import { Mascot } from '../components/Mascot'
+import type { CarChoice } from '../components/CarPicker'
 import { MatchSetup, type SetupResult } from '../components/MatchSetup'
 import { Match } from '../components/Match'
 import { PATH_CHAPTERS, SUBJECTS, RACE_BANK } from '../data'
@@ -14,7 +15,7 @@ function shuffle<T>(a: T[]): T[] {
 }
 const classPool = (): QItem[] => shuffle(RACE_BANK).map((q) => ({ prompt: q.q, a: q.a }))
 
-export function Adventure({ defaultCar = 0 }: { defaultCar?: number }) {
+export function Adventure({ defaultCar }: { defaultCar?: CarChoice }) {
   const t = useT()
   const [grade, setGrade] = useState(8)
   const [subject, setSubject] = useState('algebra')
